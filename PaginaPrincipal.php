@@ -1,7 +1,6 @@
 <?php
 
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -10,6 +9,15 @@
         <title>Document</title>
     </head>
     <body>
-        
+        <header>
+            <div>
+                <ul>
+                    <li><a href="">Crear producto</a></li>
+                    <li><a href="">Consultar el listado de productos</a></li>
+                    <li><a href="">Modificar Producto</a></li>
+                    <li><a href="">Eliminar producto</a></li>
+                </ul>
+            </div>
+        </header>
     </body>
 </html>
