@@ -12,9 +12,9 @@
         <header>
             <div>
                 <ul>
-                    <li><a href="">Crear producto</a></li>
-                    <li><a href="">Consultar el listado de productos</a></li>
-                    <li><a href="">Modificar Producto</a></li>
+                    <li><a href="crear_producto.php">Crear producto</a></li>
+                    <li><a href="listado_producto.php">Consultar el listado de productos</a></li>
+                    <li><a href="modificar_producto.php">Modificar Producto</a></li>
                     <li><a href="">Eliminar producto</a></li>
                 </ul>
             </div>
