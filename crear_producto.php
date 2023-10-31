@@ -12,7 +12,8 @@
         <title>Crear producto</title>
     </head>
     <body>
-        <label id="identificador" >Id: </label>
+      <form action="post">
+      <label id="identificador" >Id: </label>
         <input type="text">
         <label id="nombre" >Nombre: </label>
         <input type="text">
@@ -26,5 +27,6 @@
         <label id="categoria" >Categoría: </label>
         <input type="text">
           <button type="submit">Subir datos</button>
+      </form>
     </body>
 </html>
