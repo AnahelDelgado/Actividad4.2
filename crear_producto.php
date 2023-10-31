@@ -12,7 +12,7 @@
         <title>Crear producto</title>
     </head>
     <body>
-        <label id="identificador" ></label>
+        <label id="identificador" >Id: </label>
         <input type="text">
         <label id="nombre" >Nombre: </label>
         <input type="text">
