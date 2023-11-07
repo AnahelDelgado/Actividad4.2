@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Mover el archivo a una ubicación deseada
-        $carpeta_destino = "C:/xampp/htdocs/Actividad3.1";
+        $carpeta_destino = "C:/xampp/htdocs/Actividad3.1/";
         move_uploaded_file($_FILES['file1']['tmp_name'], $carpeta_destino . $nombre_archivo);
     }
 

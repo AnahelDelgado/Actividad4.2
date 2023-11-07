@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Si no hay errores, insertar datos en la tabla de productos
     if (empty($errors)) {
         // Mover el archivo a la carpeta de destino
-        $carpeta_destino = "C:/xampp/htdocs/Actividad3.1/Actividad3.1/Archivos/";
+        $carpeta_destino = "C:/xampp/htdocs/xampp/Actividad3.1/Actividad3.1/";
         move_uploaded_file($_FILES['imagen']['tmp_name'], $carpeta_destino . $nombre_archivo);
 
         // Insertar datos en la tabla de productos
