@@ -43,10 +43,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "El tamaño del archivo es demasiado grande. El tamaño máximo permitido es 2 MB.";
         }
 
-        // Mover el archivo a una ubicación deseada (por ejemplo, una carpeta de carga)
-        $carpeta_destino = "xampp/Actividad3.1/Actividad3.1";
+        // Mover el archivo a una ubicación deseada
+        $carpeta_destino = "C:/xampp/htdocs/Actividad3.1";
         move_uploaded_file($_FILES['file1']['tmp_name'], $carpeta_destino . $nombre_archivo);
-
     }
 
     // Validación del campo Categoría
@@ -56,27 +55,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear producto</title>
-</head>
-<body>
-    <form action="procesar_formulario.php" method="post" enctype="multipart/form-data">
-        <label for="id">Id: </label>
-        <input type="text" name="id">
-        <label for="nombre">Nombre: </label>
-        <input type="text" name="nombre">
-        <label for="precio">Precio: </label>
-        <input type="text" name="precio">
-        <fieldset>
-            <legend>Subida de archivos</legend>
-            <label for="file1">Imagen: </label>
-            <input type="file" name="file1" id="file1">
-        </fieldset>
-        <label for="categoria">Categoría: </label>
-        <input type="text" name="categoria">
-        <button type="submit">Subir datos</button>
-    </form>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Crear producto</title>
+    </head>
+    <body>
+        <form action="procesar_formulario.php" method="post" enctype="multipart/form-data">
+            <label for="id">Id: </label>
+            <input type="text" name="id">
+            <label for="nombre">Nombre: </label>
+            <input type="text" name="nombre">
+            <label for="precio">Precio: </label>
+            <input type="text" name="precio">
+            <fieldset>
+                <legend>Subida de archivos</legend>
+                <label for="file1">Imagen: </label>
+                <input type="file" name="file1" id="file1">
+            </fieldset>
+            <label for="categoria">Categoría: </label>
+            <input type="text" name="categoria">
+            <button type="submit">Subir datos</button>
+        </form>
+    </body>
 </html>
