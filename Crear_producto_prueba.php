@@ -3,9 +3,10 @@
     $servername = "localhost";
     $username = "actividad3.1";
     $password = "actividad3.1";
+    $database = "actividad3.1";
 
     //Create connection
-    $conn = new mysqli($servername, $username, $password);
+    $conn = new mysqli($servername, $username, $password, $database);
 
     //Check connection
     if ($conn -> connect_error){
@@ -19,16 +20,11 @@ $errors = array();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validación de campos
-    $id = $_POST['id'];
     $nombre = $_POST['nombre'];
     $precio = $_POST['precio'];
-    $categoria = $_POST['categoria'];
+    $categoria = "null";
 
     // Validación de campos
-    if (empty($id)) {
-        echo "El campo Id es obligatorio.";
-    } else {
-    }
 
     if (empty($nombre)) {
         echo "El campo Nombre es obligatorio.";
@@ -42,13 +38,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
     }
 
+    print_r($_FILES);
     // Validación de imagen
-    if ($_FILES['imagen']['error'] !== UPLOAD_ERR_OK) {
+    if ($_FILES['file1']['error'] !== UPLOAD_ERR_OK) {
         $errors[] = "Error al subir la imagen.";
     } else {
-        $nombre_archivo = $_FILES['imagen']['name'];
-        $tipo_archivo = $_FILES['imagen']['type'];
-        $tamano_archivo = $_FILES['imagen']['size'];
+        $nombre_archivo = $_FILES['file1']['name'];
+        $tipo_archivo = $_FILES['file1']['type'];
+        $tamano_archivo = $_FILES['file1']['size'];
 
         // Validar el tipo de archivo
         $extensiones_permitidas = array('jpeg', 'jpg', 'png', 'gif');
@@ -68,11 +65,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Si no hay errores, insertar datos en la tabla de productos
     if (empty($errors)) {
         // Mover el archivo a la carpeta de destino
-        $carpeta_destino = "C:/xampp/htdocs/xampp/Actividad3.1/Actividad3.1/";
-        move_uploaded_file($_FILES['imagen']['tmp_name'], $carpeta_destino . $nombre_archivo);
+        $carpeta_destino = "C:/xampp/htdocs/xampp/Actividad3.1/Actividad3.1/Archivos";
+        move_uploaded_file($_FILES['file1']['tmp_name'], $carpeta_destino . $nombre_archivo);
 
         // Insertar datos en la tabla de productos
-        $sql = "INSERT INTO productos (id, nombre, precio, categoria, imagen) VALUES ('$id', '$nombre', '$precio', '$categoria', '$nombre_archivo')";
+        $sql = "INSERT INTO productos (nombre, precio, categoría, imagen) VALUES ('$nombre', '$precio', '$categoria', '$nombre_archivo')";
         if ($conn->query($sql) === TRUE) {
             echo "Producto creado con éxito.";
         } else {
@@ -115,9 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         ?>
 
-        <form action="crear_producto.php" method="post" enctype="multipart/form-data">
-            <label for="id">Id: </label>
-            <input type="text" name="id" value="<?php echo $id; ?>"><br>
+        <form action="crear_producto_prueba.php" method="post" enctype="multipart/form-data">
 
             <label for="nombre">Nombre: </label>
             <input type="text" name="nombre" value="<?php echo $nombre; ?>"><br>
@@ -125,8 +120,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label for="precio">Precio: </label>
             <input type="text" name="precio" value="<?php echo $precio; ?>"><br>
 
-            <label for="imagen">Imagen: </label>
-            <input type="file" name="imagen"><br>
+            <label for="file1">Imagen: </label>
+            <input type="file" name="file1"><br>
 
             <label for="categoria">Categoría: </label>
             <select name="categoria">
