@@ -5,14 +5,16 @@
     $password = "actividad3.1";
     $database = "actividad3.1";
 
-    //Create connection
+    //Crear conección con "mysqli"
     $conn = new mysqli($servername, $username, $password, $database);
-
     //Check connection
     if ($conn -> connect_error){
         die("Connection failed:" . $conn -> connection_error);
     }
     echo "Connected successfully";
+
+    //Crear conección con PDO
+    //$mbd = new PDO('mysql:host=localhost;dbname=actividad3.1', $username, $password);
 
 // Inicializar variables para los campos del formulario
 $id = $nombre = $precio = $categoria = "";
@@ -38,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
     }
 
-    print_r($_FILES);
+    //print_r($_FILES);
     // Validación de imagen
     if ($_FILES['file1']['error'] !== UPLOAD_ERR_OK) {
         $errors[] = "Error al subir la imagen.";
@@ -69,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         move_uploaded_file($_FILES['file1']['tmp_name'], $carpeta_destino . $nombre_archivo);
 
         // Insertar datos en la tabla de productos
-        $sql = "INSERT INTO productos (nombre, precio, categoría, imagen) VALUES ('$nombre', '$precio', '$categoria', '$nombre_archivo')";
+        $sql = "INSERT INTO productos (nombre, precio, imagen) VALUES ('$nombre', '$precio', '$nombre_archivo')";
         if ($conn->query($sql) === TRUE) {
             echo "Producto creado con éxito.";
         } else {
@@ -80,16 +82,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn->close();
     }
 }
-
-// Obtener categorías de la base de datos
-//$categorias = array();
-//$result = $conn->query("SELECT * FROM categorias");
-//if ($result->num_rows > 0) {
-// while ($row = $result->fetch_assoc()) {
-//      $categorias[] = $row['nombre_categoria'];
-//   }
-//}
-
 ?>
 
 <!DOCTYPE html>
@@ -128,10 +120,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <option value="">Seleccione una categoría</option>
                 <?php
                 foreach ($categorias as $cat) {
-                    echo "<option value='$cat' " . ($categoria == $cat ? "selected" : "") . ">$cat</option>";
-                }
+                        echo "<option value='$cat' " . ($categoria == $cat ? "selected" : "") . ">$cat</option>";
+                    }
                 ?>
-            </select><br>
+            </select><br> 
 
             <button type="submit">Subir producto</button>
         </form>
