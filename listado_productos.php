@@ -18,11 +18,11 @@
     $result = $conn->query($sql);
 
     // Obtener categorías de la base de datos
-    $categorías = array();
-    $resultCategorias = $conn->query("SELECT * FROM categorías");
+    $categorias = array();
+    $resultCategorias = $conn->query("SELECT Id, Nombre FROM categoria");
     if ($resultCategorias->num_rows > 0) {
         while ($rowCat = $resultCategorias->fetch_assoc()) {
-            $categorías[$rowCat['Id']] = $rowCat['Nombre'];
+            $categorias[$rowCat['Id']] = $rowCat['Nombre'];
         }
     }
 ?>
@@ -54,7 +54,7 @@
                     echo "<td>" . $row['Nombre'] . "</td>";
                     echo "<td>" . $row['Precio'] . "</td>";
                     echo "<td><img src='Actividad3.1/" . $row['Imagen'] . "' alt='Imagen' width='50'></td>";
-                    echo "<td>" . $categorías[$row['categorías']] . "</td>";
+                    echo "<td>" . $categorias[$row['categoria']] . "</td>";
                     echo "<td><a href='edita_producto.php?id=" . $row['id'] . "'>Modificar</a> | <a href='eliminar_producto.php?id=" . $row['id'] . "'>Eliminar</a></td>";
                     echo "</tr>";
                 }
