@@ -6,15 +6,32 @@
     $database = "actividad3.1";
 
     //Crear conección con "mysqli"
-    $conn = new mysqli($servername, $username, $password, $database);
+    //$conn = new mysqli($servername, $username, $password, $database);
     //Check connection
-    if ($conn -> connect_error){
-        die("Connection failed:" . $conn -> connection_error);
-    }
-    echo "Connected successfully";
+    //if ($conn -> connect_error){
+    //    die("Connection failed:" . $conn -> connection_error);
+    //}
+    //echo "Connected successfully";
 
     //Crear conección con PDO
     //$mbd = new PDO('mysql:host=localhost;dbname=actividad3.1', $username, $password);
+
+    try {
+        $conn = new PDO('mysql:host=localhost;dbname=actividad3.1', $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch(PDOException $e) {
+        echo "Error de conexión: " . $e->getMessage();
+    }
+
+    $stmt = $conn->query("SELECT Id, Nombre FROM categoria");
+    while ($row = $stmt->fetch()) {
+        $categoria[$row['Id']] = $row['Nombre'];
+    }
+    $categoria = $conn->query("SELECT Id, Nombre FROM categoria")->fetchAll(PDO::FETCH_COLUMN);
+
+    echo "<pre>";
+        print_r($categoria);
+    echo "</pre>";
 
 // Inicializar variables para los campos del formulario
 $id = $nombre = $precio = $categoria = "";
@@ -24,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validación de campos
     $nombre = $_POST['nombre'];
     $precio = $_POST['precio'];
-    $categoria = "null";
+    $categoria = $_POST['categoria'];
 
     // Validación de campos
 
@@ -71,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         move_uploaded_file($_FILES['file1']['tmp_name'], $carpeta_destino . $nombre_archivo);
 
         // Insertar datos en la tabla de productos
-        $sql = "INSERT INTO productos (nombre, precio, imagen) VALUES ('$nombre', '$precio', '$nombre_archivo')";
+        $sql = "INSERT INTO productos (nombre, precio, categoria ,imagen) VALUES ('$nombre', '$precio','$categoria', '$nombre_archivo')";
         if ($conn->query($sql) === TRUE) {
             echo "Producto creado con éxito.";
         } else {
@@ -116,14 +133,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="file" name="file1"><br>
 
             <label for="categoria">Categoría: </label>
-            <select name="categoria">
-                <option value="">Seleccione una categoría</option>
-                <?php
-                foreach ($categorias as $cat) {
-                        echo "<option value='$cat' " . ($categoria == $cat ? "selected" : "") . ">$cat</option>";
-                    }
-                ?>
-            </select><br> 
+            <form>
+                <select name="modulo">
+                    <?php
+                        foreach($categoria as $clave => $valor) {
+                            echo "<option value='".$clave."'>".$valor."</option>";
+                        }
+                    ?>
+                </select>
+            </form><br> 
 
             <button type="submit">Subir producto</button>
         </form>
