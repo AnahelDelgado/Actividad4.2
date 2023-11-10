@@ -134,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <label for="categoria">Categoría: </label>
             <form>
-                <select name="modulo">
+                <select name="categoria">
                     <?php
                         foreach($categoria as $clave => $valor) {
                             echo "<option value='".$clave."'>".$valor."</option>";
