@@ -14,17 +14,17 @@
      echo "Connected successfully";
 
     // Obtener todos los productos de la base de datos
-    $sql = "SELECT * FROM productos";
+    $sql = "SELECT productos.id, productos.Nombre, Precio, Imagen, categoria.Nombre as nombre_categoria FROM productos, categoria where categoria.id=productos.Categoria";
     $result = $conn->query($sql);
 
     // Obtener categorías de la base de datos
-    $categorias = array();
-    $resultCategorias = $conn->query("SELECT Id, Nombre FROM categoria");
-    if ($resultCategorias->num_rows > 0) {
-        while ($rowCat = $resultCategorias->fetch_assoc()) {
-            $categorias[$rowCat['Id']] = $rowCat['Nombre'];
-        }
-    }
+    //$categorias = array();
+    //$resultCategorias = $conn->query("SELECT Id, Nombre FROM categoria");
+    //if ($resultCategorias->num_rows > 0) {
+    //    while ($rowCat = $resultCategorias->fetch_assoc()) {
+    //        $categorias[$rowCat['Id']] = $rowCat['Nombre'];
+     //   }
+    //}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,8 +53,8 @@
                     echo "<td>" . $row['id'] . "</td>";
                     echo "<td>" . $row['Nombre'] . "</td>";
                     echo "<td>" . $row['Precio'] . "</td>";
-                    echo "<td><img src='Actividad3.1/" . $row['Imagen'] . "' alt='Imagen' width='50'></td>";
-                    echo "<td>" . $categorias[$row['categoria']] . "</td>";
+                    echo "<td><img src='./Archivos/" . $row['Imagen'] . "' alt='Imagen' width='50'></td>";
+                    echo "<td>" . $row['nombre_categoria']. "</td>";
                     echo "<td><a href='edita_producto.php?id=" . $row['id'] . "'>Modificar</a> | <a href='eliminar_producto.php?id=" . $row['id'] . "'>Eliminar</a></td>";
                     echo "</tr>";
                 }
