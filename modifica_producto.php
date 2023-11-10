@@ -21,17 +21,8 @@
         $categoria = $_GET['categoria'];
     
         if (!empty($nombreCompleto)) {
-            /* PREPARE */
-            /*
-            $updateStmt = $conn->prepare("UPDATE modulos SET nombre_completo = :nombre_completo, descripcion = :descripcion WHERE iniciales = :iniciales");
-            $updateStmt->bindParam(':nombre_completo', $nombreCompleto);
-            $updateStmt->bindParam(':descripcion', $descripcion);
-            $updateStmt->bindParam(':iniciales', $iniciales);
-            $updateStmt->execute();
-            */
-    
-            /* QUERY */
-            $updateStmt = $conn->query("UPDATE modulos SET nombre_completo = '$nombreCompleto', descripcion = '$descripcion' WHERE iniciales = '$iniciales'");
+            
+            $updateStmt = $conn->query("UPDATE productos SET nombre = '$nombre', precio = '$precio', imagen='$imagen' WHERE id = '$id'");
     
             echo "Módulo actualizado correctamente.";
         } else {
@@ -50,24 +41,20 @@
     </head>
     <body>
         <form action="get">
-            <label for="id">Id: </label>
+            <label for="id">id: </label>
             <input type="text" name="id">
         </form>
-        <form action="procesar_formulario.php" method="post" enctype="multipart/form-data">
-            <label for="nombre">Nombre: </label>
-            <input type="text" name="nombre">
-            <label for="precio">Precio: </label>
-            <input type="text" name="precio">
+        <form action="modifica_producto.php" method="get">
+            Id: <?php echo $id['id']; ?><br><br>
+            Nombre: <input type="text" size='50' name="Nombre" value="<?php echo $Nombre['Nombre']; ?>" required><br><br>
+            Precio: <input type="text" size='50' name="Precio" value="<?php echo $Precio['Precio']; ?>" required><br><br>
             <fieldset>
                 <legend>Subida de archivos</legend>
                 <label for="file1">Imagen: </label>
                 <input type="file" name="file1" id="file1">
             </fieldset>
-            <label for="categoria">Categoría:</label>
-            <input type="text" name="categoria">
-
-            <input type="hidden" name="id" value="<?php echo $id; ?>">
-            <button type="submit">Modificar datos</button>
+            <input type="hidden" name="id" value="<?php echo $Id; ?>">
+            <input type="submit" name="boton" value="Actualizar">   
         </form>
     </body>
 </html>
