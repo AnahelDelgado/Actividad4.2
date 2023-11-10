@@ -12,7 +12,7 @@
         echo "Error de conexión: " . $e->getMessage();
     }
 
-    $id = $_GET['id'];
+    $id_obtenida = "SELECT id from productos";
 
     if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['boton'])) {
         $nombre = $_GET['nombre'];
@@ -40,12 +40,8 @@
         <title>Modificar producto</title>
     </head>
     <body>
-        <form action="get">
-            <label for="id">id: </label>
-            <input type="text" name="id">
-        </form>
         <form action="modifica_producto.php" method="get">
-            Id: <?php echo $id['id']; ?><br><br>
+            Id: <?php echo "<a>" . $id_obtenida['id'] . "</a>"; ?><br><br>
             Nombre: <input type="text" size='50' name="Nombre" value="<?php echo $Nombre['Nombre']; ?>" required><br><br>
             Precio: <input type="text" size='50' name="Precio" value="<?php echo $Precio['Precio']; ?>" required><br><br>
             <fieldset>

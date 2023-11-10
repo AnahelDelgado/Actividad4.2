@@ -55,7 +55,7 @@
                     echo "<td>" . $row['Precio'] . "</td>";
                     echo "<td><img src='./Archivos/" . $row['Imagen'] . "' alt='Imagen' width='50'></td>";
                     echo "<td>" . $row['nombre_categoria']. "</td>";
-                    echo "<td><a href='edita_producto.php?id=" . $row['id'] . "'>Modificar</a> | <a href='eliminar_producto.php?id=" . $row['id'] . "'>Eliminar</a></td>";
+                    echo "<td><a href='modifica_producto.php?id=" . $row['id'] . "'>Modificar</a> | <a href='eliminar_producto.php?id=" . $row['id'] . "'>Eliminar</a></td>";
                     echo "</tr>";
                 }
             } else {
