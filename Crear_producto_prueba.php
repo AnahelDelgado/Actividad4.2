@@ -4,7 +4,7 @@
     $username = "actividad3.1";
     $password = "actividad3.1";
     $database = "actividad3.1";
-
+    
     //Crear conección con "mysqli"
     //$conn = new mysqli($servername, $username, $password, $database);
     //Check connection
