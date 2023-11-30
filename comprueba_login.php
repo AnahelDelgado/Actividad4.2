@@ -2,7 +2,7 @@
 
     if(!isset($_SESSION["correo_electronico"]))
     {
-        header("Location: login_form.php");
+        header("Location: form_login.php");
     }
 
 ?>

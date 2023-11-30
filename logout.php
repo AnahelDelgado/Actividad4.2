@@ -1,5 +1,6 @@
 <?php
 
+session_name("actividad3.1");
 session_start();
 
 echo "<br>Salimos...";

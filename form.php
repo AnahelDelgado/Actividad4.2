@@ -1,4 +1,8 @@
 <?php
+
+session_name("actividad3.1");
+session_start();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Establecer la conexión a la base de datos (ajusta los detalles de conexión según tu configuración)
     $servername = "localhost";
